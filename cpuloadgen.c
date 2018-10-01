@@ -59,6 +59,12 @@
 
 #define CPULOADGEN_REVISION ((const char *) "0.94")
 
+#ifndef CPU_SET
+#define CPU_SET(cpu, cpusetp) __CPU_SET_S (cpu, sizeof (cpu_set_t), cpusetp)
+#endif
+#ifndef CPU_ZERO
+#define CPU_ZERO(cpusetp) __CPU_ZERO_S (sizeof (cpu_set_t), cpusetp)
+#endif
 
 /* #define DEBUG */
 #ifdef DEBUG
