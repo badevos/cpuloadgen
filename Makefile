@@ -48,6 +48,8 @@ DESTDIR = ./out
 
 objects = cpuloadgen.o timers_b.o dhry_21b.o
 
+all: cpuloadgen logload
+
 cpuloadgen: $(objects) builddate.o dhry.h
 	$(CC) $(MYCFLAGS) -o cpuloadgen $(objects) builddate.o
 	rm builddate.c
@@ -55,9 +57,12 @@ cpuloadgen: $(objects) builddate.o dhry.h
 builddate.c: $(objects)
 	echo 'char *builddate="'`date`'";' > builddate.c
 
+logload: logload.c
+	$(CC) $(MYCFLAGS) -o logload logload.c
+
 install: cpuloadgen
 	install -d $(DESTDIR)
 	install cpuloadgen $(DESTDIR)
 
 clean:
-	rm -f cpuloadgen $(objects) builddate.o builddate.c
+	rm -f cpuloadgen *.o builddate.c logload
