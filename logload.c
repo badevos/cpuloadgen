@@ -62,7 +62,7 @@ static void update_stat (int verbose)
 
 int main ( int argc, char* argv[] )
 {
-	int lag = 0;
+	int delay = 0;
 	int times = 0;
 	int forever = 0;
 
@@ -74,7 +74,7 @@ int main ( int argc, char* argv[] )
 	}
 
 	times = atoi(argv[1]);
-	lag = atoi(argv[2]);
+	delay = atoi(argv[2]);
 	if (times == 0) {
 		forever = 1;
 	}
@@ -82,11 +82,11 @@ int main ( int argc, char* argv[] )
 	openlog("logload", LOG_PID, LOG_USER);
 
 	update_stat(0);
-	msleep(lag);
+	msleep(delay);
 
 	while (times-- || forever) {
 		update_stat(1);
-		msleep(lag);
+		msleep(delay);
 	}
 
 	return 0;
