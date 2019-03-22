@@ -1,5 +1,6 @@
 # CPULoadGen Output Binary
 cpuloadgen
+logload
 
 # Object files
 *.o
