@@ -48,7 +48,7 @@ DESTDIR = ./out
 
 objects = cpuloadgen.o timers_b.o dhry_21b.o
 
-all: cpuloadgen logload
+all: cpuloadgen logload pthreadloadgen
 
 cpuloadgen: $(objects) builddate.o dhry.h
 	$(CC) $(MYCFLAGS) -o cpuloadgen $(objects) builddate.o
@@ -60,9 +60,12 @@ builddate.c: $(objects)
 logload: logload.c
 	$(CC) $(MYCFLAGS) -o logload logload.c
 
+pthreadloadgen: pthreadloadgen.c
+	$(CC) $(MYCFLAGS) -o pthreadloadgen pthreadloadgen.c
+
 install: cpuloadgen
 	install -d $(DESTDIR)
 	install cpuloadgen $(DESTDIR)
 
 clean:
-	rm -f cpuloadgen *.o builddate.c logload
+	rm -f cpuloadgen *.o builddate.c logload pthreadloadgen
